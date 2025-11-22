@@ -1,7 +1,7 @@
 import asyncio
 from django.shortcuts import render
 from django.http import JsonResponse, Http404
-from django.views.generic.base import FormView,TemplateView
+from django.views.generic import FormView,TemplateView
 from django.views.decorators.http import require_GET
 from django.utils.decorators import method_decorator
 from .forms import SearchForm
@@ -13,8 +13,13 @@ from .services import fetch_weather
 class HomePageView(TemplateView):
     template_name = "main/search.html"
     
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = SearchForm()
+        return context
+    
 
-class SearchView(TemplateView):
+class SearchView(FormView):
     template_name = "main/search.html"
     form_class = SearchForm
     
@@ -27,8 +32,8 @@ class SearchView(TemplateView):
             query=f"{city},{country}",
             ip=self.request.META.get("REMOTE_ADDR"),
         )
-        
-        return self.render_to_response(self.get_context_data(city=city, country=country))
+        context = self.get_context_data(form=form, city=city, country=country)
+        return self.render_to_response(context)
     
 @method_decorator(require_GET, name='dispatch')
 class WeatherDataView(TemplateView):

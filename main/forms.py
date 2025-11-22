@@ -19,6 +19,7 @@ class SearchForm(forms.Form):
         super().__init__(*args, **kwargs)
         country = (City.objects.values_list('country',flat=True).distinct().order_by('country'))
         self.fields['country'].choices = [("", "- Select country -")] + [(c,c) for c in country if c] 
+        self.fields["country"].initial = "MX"
         
     def clean_city(self):
         city = (self.cleaned_data.get('city') or "").strip()

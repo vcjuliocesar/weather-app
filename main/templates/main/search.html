@@ -1,0 +1,14 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <form method="post" action="" autocomplete="off" id="search-form">
+        {% csrf_token %}
+        {{form.city.label_tag}} {{form.city}}
+        {{form.country.label_tag}} {{form.country}}
+        <button type="submit">Buscar</button>
+    </form>
+{% endblock %}
