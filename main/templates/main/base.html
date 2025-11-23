@@ -1,14 +1,15 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    {% load static %}
     <!-- Estilos -->
     <link href="{% static 'main/css/main.css' %}" rel="stylesheet">
     <title>{% block title %} Home {% endblock %}</title>
 </head>
 <body>
     <main>{% block content %} {% endblock %}</main>
+    <script defer src="{% static 'main/js/main.js' %}"></script>
 </body>
 </html>

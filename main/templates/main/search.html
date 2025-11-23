@@ -1,0 +1,26 @@
+{% extends 'main/base.html' %}
+
+{% load static %}
+
+{% block title %}Inicio{% endblock %}
+
+{% block content %}
+    <form autocomplete="off" id="search-form">
+        {% csrf_token %}
+        {{form.city.label_tag}} {{form.city}}
+        {{form.country.label_tag}} {{form.country}}
+        <button type="submit">Buscar</button>
+    </form>
+    <section id="result" hidden>
+        <div>
+            <h2 id="cityTitle"></h2>
+            <p><span id="temp"></span>°C</p>
+            <p id="summary"></p>
+            <small id="updated"></small>
+        </div>
+        <div>
+            <canvas id="forecastChart"></canvas>
+        </div>
+    </section>
+    <div id="error"></div>
+{% endblock %}
