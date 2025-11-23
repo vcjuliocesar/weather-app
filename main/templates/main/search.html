@@ -5,22 +5,24 @@
 {% block title %}Inicio{% endblock %}
 
 {% block content %}
-    <form autocomplete="off" id="search-form">
+    <form class="card" autocomplete="off" id="search-form">
         {% csrf_token %}
         {{form.city.label_tag}} {{form.city}}
         {{form.country.label_tag}} {{form.country}}
         <button type="submit">Buscar</button>
     </form>
-    <section id="result" hidden>
-        <div>
+
+    <section class="grid" id="result" hidden>
+        <div class="card">
             <h2 id="cityTitle"></h2>
-            <p><span id="temp"></span>°C</p>
+            <p class="temp"><span id="temp"></span>°C</p>
             <p id="summary"></p>
             <small id="updated"></small>
         </div>
-        <div>
+        <div class="card">
             <canvas id="forecastChart"></canvas>
         </div>
     </section>
-    <div id="error"></div>
+    
+    <div id="error" class="alert" hidden></div>
 {% endblock %}
